@@ -70,14 +70,13 @@ a.active{
 #exerciseTab img{
 	max-width: 100%;
 	position: relative;
-	top: -50px;
+	top: -30px;
 }
 
 /* treningViev */
 
 #treningView{
 	width: 50%;
-
 }
 
 .listTitle{
@@ -87,12 +86,14 @@ a.active{
 
 .titleEdit{
 	display: block;
+	height: 29px;
 	margin: 20px auto;
 	font-size: 1.5em;
 	font-weight: bold;
 }
 
 #editButton{
+	background-color: rgb(221, 221, 221);
 	border-radius: 10px;
 	font-size: 1em;
 	padding: 8px;
@@ -195,4 +196,38 @@ a.active{
 
 .info{
 	margin: 20px;
+}
+
+@media only screen and (max-width: 650px) {
+h1.logo{
+	letter-spacing: 2px;
+	margin: 25px auto;
+}
+	
+.menu > li{
+	display: block;
+	border: none;
+}
+
+.menu > li:first-child{
+	border: none;
+}
+
+.work{
+	clear: both;
+}
+
+#exerciseTab{
+	max-width: 100%;
+    height: auto;
+    width: auto;
+}
+
+#treningView{
+	width: 100%;
+}
+
+.listTitle{
+	margin-top: 0;
+}
 }

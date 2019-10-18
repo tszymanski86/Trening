@@ -118,11 +118,39 @@ document.addEventListener("DOMContentLoaded", function() {
 			listDiv.appendChild(titleInput);
 		}
 
-		function changeOrder(object, index, direction){
+		function changeOrder(object, index, direction, item){
 			if ((index + direction >= 0) && (index + direction < listExercises[activeList].length)) {
+
+				var anim = setInterval(frame, 5);
+				let counter = 0;
+				let item2;
+				if (direction < 0)
+				{item2 = item.previousSibling;} else
+				{item2 = item.nextSibling;}
+				let moveDistance = Math.abs(item.offsetTop - item2.offsetTop) / 2;
+
+				function frame(){
+					if (counter >= moveDistance) {
+						clearInterval(anim);
+					} else {
+						counter++;
+						item.style.top = 2 * direction * counter + 'px';
+						item2.style.bottom = 2 * direction * counter + 'px';
+						if (counter < moveDistance * 0.3)
+						{
+							item.style.right = 2 * direction * counter + 'px';
+							item2.style.left = 2 * direction * counter + 'px';
+						} else if (counter > moveDistance * 0.7)
+						{
+							item.style.right = 2 * direction * (moveDistance - counter) + 'px';
+							item2.style.left = 2 * direction * (moveDistance - counter) + 'px';
+						}
+					}
+				}
+
 				listExercises[activeList].splice(index, 1);
 				listExercises[activeList].splice(index + direction, 0, object);
-				showList();
+				setTimeout(function(){showList();}, 500); 
 			}
 		}
 
@@ -201,10 +229,10 @@ document.addEventListener("DOMContentLoaded", function() {
 			arrows.appendChild(arrowUp);
 			arrows.appendChild(arrowDown);
 			arrowUp.addEventListener('click', function(){
-				changeOrder(exercise, index, -1);
+				changeOrder(exercise, index, -1, item);
 			});
 			arrowDown.addEventListener('click', function(){
-				changeOrder(exercise, index, 1);
+				changeOrder(exercise, index, 1, item);
 			});	
 		}
 		
@@ -244,3 +272,4 @@ activeMenu();
 mouseSelect();
 showList();
 });
+

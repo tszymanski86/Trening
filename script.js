@@ -8,52 +8,42 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	listExercises = [[{
 		id: 4,
-		sets: 3,
 		comment: '20 powtórzeń'
 	},
 	{
 		id: 28,
-		sets: 3,
 		comment: '20 powtórzeń'
 	},
 	{
 		id: 32,
-		sets: 3,
 		comment: '20 powtórzeń'
 	}],
 	[{
 		id: 0,
-		sets: 3,
 		comment: '20 powtórzeń'
 	},
 	{
 		id: 8,
-		sets: 3,
 		comment: '20 powtórzeń'
 	},
 	{
 		id: 3,
-		sets: 3,
 		comment: '20 powtórzeń'
 	}],
 	[{
 		id: 30,
-		sets: 3,
 		comment: '20 powtórzeń'
 	},
 	{
 		id: 14,
-		sets: 3,
 		comment: '20 powtórzeń'
 	},
 	{
 		id: 33,
-		sets: 3,
 		comment: '20 powtórzeń'
 	},
 	{
 		id: 35,
-		sets: 3,
 		comment: '20 powtórzeń'
 	}]	
 	];
@@ -93,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function() {
     function addExercise(id){
         function Exercise(id)  {
             this.id = id,
-            this.sets = 3,
 			this.comment = '20 powtórzeń'
         }
         const newExercise = new Exercise(id);
@@ -157,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		function add_edit_button(){
 			const editButton = document.createElement('button');
 			editButton.innerHTML = 'edytuj';
-			editButton.id = 'editButton';
+			editButton.classList.add('editButton');
 			listDiv.appendChild(editButton);
 			editButton.addEventListener('click', function(){
 				const comments = document.querySelectorAll('.comment');
@@ -184,6 +173,65 @@ document.addEventListener("DOMContentLoaded", function() {
 						listExercises[activeList][i].comment = textEdit[i].value;
 					});
 				}
+			});
+		}
+
+		function add_undo_button(){
+			const undoButton = document.createElement('button');
+			undoButton.innerHTML = 'cofnij zmiany';
+			undoButton.classList.add('editButton');
+			undoButton.style.marginLeft = '15px'
+			listDiv.appendChild(undoButton);
+			undoButton.addEventListener('click', function(){
+				titleList = ['Trening Dynamiczny', 'Trening Niedzielny', 'Trening Ciężki'];
+				const treningNames = document.querySelectorAll('.menu li a');
+				treningNames.forEach(function(name, i){
+					name.innerHTML = titleList[i];
+				});
+				const treningNameH = document.querySelector('.listTitle');
+				treningNameH.innerHTML = titleList[activeList];
+				listExercises = [[{
+					id: 4,
+					comment: '20 powtórzeń'
+				},
+				{
+					id: 28,
+					comment: '20 powtórzeń'
+				},
+				{
+					id: 32,
+					comment: '20 powtórzeń'
+				}],
+				[{
+					id: 0,
+					comment: '20 powtórzeń'
+				},
+				{
+					id: 8,
+					comment: '20 powtórzeń'
+				},
+				{
+					id: 3,
+					comment: '20 powtórzeń'
+				}],
+				[{
+					id: 30,
+					comment: '20 powtórzeń'
+				},
+				{
+					id: 14,
+					comment: '20 powtórzeń'
+				},
+				{
+					id: 33,
+					comment: '20 powtórzeń'
+				},
+				{
+					id: 35,
+					comment: '20 powtórzeń'
+				}]	
+				];
+				showList();
 			});
 		}
 
@@ -255,6 +303,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		image.src = 'img/ab-exercises-chart.jpg';
 		addTitle();
 		add_edit_button();
+		add_undo_button();
 
         listExercises[activeList].forEach(function(ob, index){
 			const el = document.createElement('div');

@@ -58,6 +58,7 @@ a.active{
 
 .work{
 	float:left;
+	overflow: hidden;
 }
 
 /* exerciseTab */
